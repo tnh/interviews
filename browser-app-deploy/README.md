@@ -22,7 +22,7 @@ We use AWS extensively and we would prefer that these sites be hosted in-house o
 
 ### Workflow (CI) process requirements 
 
-* developers want to be able to make changes quickly - and branch in a codebase and push to a branch and test 
+* developers want to be able to make changes quickly - and clone teh repo, and push to a branch and test 
 * The application is automatically deployed when code is merged to master
 
 
