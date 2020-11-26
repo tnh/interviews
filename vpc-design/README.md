@@ -14,7 +14,7 @@ You will need to submit a method of being able to repeatedly deploy a VPC with t
 
 The VPC must...
 
-* take in /20 ip range
+* Use a /20 CIDR block
 * have a default DHCP options set
 * be highly available - with 2 AZs
 * have a private and public subnets 
@@ -32,4 +32,3 @@ Additionally if you have time or thoughts, consider how to
 ### Other requirements 
 
 Please include, if necessary, the most minimal amount of commentary on how to deploy your solution.
-
