@@ -21,7 +21,7 @@ The VPC must...
 * accept http and https traffic from the open internet into the public subnet only
 * the private subnet should be able to route out to the internet for software updates
 * the private subnet must only support RDS MySQL ports and web ports (http and https)
-* provide a clear method of application to be able to find what subnets to use
+* store key information about the VPC, like the subnet-ids 
 
 Additionally if you have time or thoughts, consider how to
 * Integrate with other VPCs 
