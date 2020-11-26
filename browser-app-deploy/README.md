@@ -32,7 +32,7 @@ We use AWS extensively and we would prefer that these sites be hosted in-house o
 Submit high level architectural diagrams with some annotated comments of
 
 * The Deployment environment of the website
-* The CI flows from code commit to being deployed to production
+* A diagram that details the steps in teh CI pipeline
 
 Optionally
 
