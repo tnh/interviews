@@ -1,6 +1,6 @@
 # VPC design scenario
 
-## Background
+## Scenario
 
 Catch is looking to recreate its AWS environment and needs a way of provisioning VPCs.
 
