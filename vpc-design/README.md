@@ -4,7 +4,7 @@
 
 Catch is looking to recreate its AWS environment and needs a way of provisioning VPCs.
 
-You will need to submit a method of being able to repeatedly deploy a VPC with the below requirements.
+Please submit a method of being able to repeatedly deploy a VPC with the below requirements.
 
 
 ## Requirements
