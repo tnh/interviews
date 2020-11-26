@@ -28,6 +28,4 @@ Additionally if you have time or thoughts, consider how to
 * talk security and privately to an ECR repo 
 
 
-### Other requirements 
 
-Please include, if necessary, the most minimal amount of commentary on how to deploy your solution.
