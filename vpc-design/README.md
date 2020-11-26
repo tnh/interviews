@@ -24,7 +24,7 @@ The VPC must...
 * provide a clear method of application to be able to find what subnets to use
 
 Additionally if you have time or thoughts, consider how to
-* integration with other VPCs 
+* Integrate with other VPCs 
 * talk securely and privately to S3
 * talk security and privately to an ECR repo 
 
