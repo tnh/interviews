@@ -19,7 +19,7 @@ The VPC must...
 * be highly available - with 2 AZs
 * have a private and public subnets 
 * accept http and https traffic from the open internet into the public subnet only
-* the private subnet should be able to route out to the internet for package and patch updates
+* the private subnet should be able to route out to the internet for software updates
 * the private subnet must only support RDS MySQL ports and web ports (http and https)
 * provide a clear method of application to be able to find what subnets to use
 
