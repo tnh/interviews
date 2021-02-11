@@ -5,23 +5,22 @@ Resources:
   MyEc2Instance:
     Type: AWS::EC2::Instance
     Properties:
-      KeyName: mykey-tmp-2019
+      KeyName: "mykey-tmp-2019"
       DisableApiTermination: 
       ImageId: ami-e6ec2c73
-      InstanceType:  z1d.metal
+      InstanceType:  'z1d.metal'
       SecurityGroupIds:
         - sg-123432
       UserData: !Base64 |
         #!/bin/bash -ex
-        # put your script here
         curl https://raw.githubusercontent.com/tnh/interviews/main/fix-cloudformation-stack/install-app.sh  | bash
       Tags:
         - Key: Name
-          Value: Bob
+          Value: "Bob"
 
 Outputs: 
   MyResourceId:
-    Description: The EC2 reference
+    Description: "The EC2 reference"
     Value: !Ref MyEc2Instance
     Export: 
       Name: MyEc2Instance
