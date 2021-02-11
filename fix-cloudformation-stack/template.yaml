@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: This is my first cloudformation stack 
+
+Resources: 
+  MyEc2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: mykey-tmp-2019
+      DisableApiTermination: 
+      ImageId: ami-e6ec2c73
+      InstanceType:  z1d.metal
+      SecurityGroupIds:
+        - sg-123432
+      UserData: !Base64 |
+        #!/bin/bash -ex
+        # put your script here
+        curl https://raw.githubusercontent.com/tnh/interviews/main/fix-cloudformation-stack/install-app.sh  | bash
+      Tags:
+        - Key: Name
+          Value: Bob
+
