@@ -19,3 +19,9 @@ Resources:
         - Key: Name
           Value: Bob
 
+Outputs: 
+  MyResourceId:
+    Description: The EC2 reference
+    Value: !Ref MyEc2Instance
+    Export: 
+      Name: MyEc2Instance
