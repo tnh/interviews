@@ -1,16 +1,44 @@
 AWSTemplateFormatVersion: 2010-09-09
-Description: This is my first cloudformation stack 
+Description: This is my first cloudformation stack
 
-Resources: 
+Parameters:
+  InstanceTypeParameter:
+    Type: String
+    Default: t3.micro
+    AllowedValues:
+      - t3.micro
+      - r5.large
+      - z1d.metal
+    Description: Enter t3.micro, r5.large, or z1d.metal. Default is t3.micro.
+  SecurityGroup:
+    Type: String
+    Default: sg-123432
+    AllowedValues:
+      - sg-123432
+      - sg-1234312
+      - sg-12343223
+    Description: Enter sg-123432, sg-1234312, or sg-12343223. Default is sg-123432.
+  ImageId:
+    Type: String
+    Default: ami-e6ec2c73
+    AllowedValues:
+      - ami-e6ec2c73
+      - ami-e6ec2c74
+      - ami-e6ec2c75
+    Description: Enter ami-e6ec2c73, ami-e6ec2c74, or ami-e6ec2c75. Default is ami-e6ec2c73.
+
+Resources:
   MyEc2Instance:
     Type: AWS::EC2::Instance
     Properties:
       KeyName: mykey-tmp-2019
-      DisableApiTermination: 
-      ImageId: ami-e6ec2c73
-      InstanceType:  z1d.metal
+      DisableApiTermination:
+      ImageId:
+        Ref: InstanceTypeParameter
+      InstanceType:
+        Ref: InstanceTypeParameter
       SecurityGroupIds:
-        - sg-123432
+        - Ref: SecurityGroup
       UserData: !Base64 |
         #!/bin/bash -ex
         # put your script here
@@ -19,9 +47,9 @@ Resources:
         - Key: Name
           Value: Bob
 
-Outputs: 
+Outputs:
   MyResourceId:
     Description: The EC2 reference
     Value: !Ref MyEc2Instance
-    Export: 
+    Export:
       Name: MyEc2Instance
