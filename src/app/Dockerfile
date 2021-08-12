@@ -1,28 +1,28 @@
 FROM golang:alpine AS build
 
+# Better caching
 ENV GO111MODULE=on
-
 WORKDIR /app
+ARG opts
 
-ADD ./ /app
+# Less layers
+RUN apk update --no-cache \
+    && apk add git
 
-RUN apk update --no-cache
-
-RUN apk add git
-
-RUN go build -o golang-test  .
+ADD . /app/
+RUN printenv \
+    && env ${opts} go build -o golang-test .
 
 # Use clean alpine to keep smallest possible
 FROM alpine
 
+# Single layer
 RUN apk update --no-cache \
     &&  apk add git \
     && mkdir /app
 
-WORKDIR /app
+# Moving up for caching
+ENTRYPOINT ["/app/golang-test"]
+EXPOSE 8000
 
 COPY --from=build /app/golang-test /app
-
-ENTRYPOINT ["/app/golang-test"]
-
-EXPOSE 8000
