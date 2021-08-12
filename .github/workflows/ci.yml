@@ -28,5 +28,12 @@ jobs:
       - name: Distribute image
         run: make distribute
 
+      - uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+          context: rpi
+        id: setcontext
+
       - name: Deploy
         run: make deploy-pi
