@@ -1,0 +1,17 @@
+---
+version: "3.7"
+services:
+
+  tests:
+    working_dir: /src
+    build:
+      context: ./tests
+    volumes:
+      - .:/src
+    links:
+      - app
+
+  app:
+    image: codingric/catch-test
+    ports:
+      - "8000:8000"

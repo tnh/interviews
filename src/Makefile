@@ -15,6 +15,7 @@ build:
 		-t codingric/catch-test:armv7-${COMMIT_SHA} \
 		./app
 
+distribute:
 	docker push codingric/catch-test
 	docker push codingric/catch-test:${COMMIT_SHA}
 	docker push codingric/catch-test:armv7
@@ -30,3 +31,7 @@ deploy-pi:
 deploy:
 	sed -e "s^codingric/catch-test:[-a-z0-9]*^codingric/catch-test:${COMMIT_SHA}^" k8s/deployment.yaml | \
 		kubectl apply -f -
+
+tests:
+	docker-compose run tests \
+	&& docker-compose down

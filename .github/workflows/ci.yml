@@ -1,0 +1,22 @@
+name: Build docker image
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: docker-build
+        run: make build
+
+      - name: tests
+        run: make tests
+
+      - name: docker-push
+        run: make distribute
+
+      - name: deploy
+        run: make deploy-pi
