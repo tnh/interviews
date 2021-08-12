@@ -1,7 +1,8 @@
 COMMIT_SHA = $(shell git rev-parse --short @)
 
-build:
+.PHONY: tests
 
+build:
 	docker build \
 		-t codingric/catch-test \
 		-t codingric/catch-test:${COMMIT_SHA} \
