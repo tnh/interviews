@@ -1,0 +1,102 @@
+---
+# Source: goapp/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gouser
+  labels:
+    helm.sh/chart: goapp-0.1.0
+    app.kubernetes.io/name: goapp
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: goapp/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: RELEASE-NAME-goapp
+  labels:
+    helm.sh/chart: goapp-0.1.0
+    app.kubernetes.io/name: goapp
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: goapp
+    app.kubernetes.io/instance: RELEASE-NAME
+---
+# Source: goapp/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: RELEASE-NAME-goapp
+  labels:
+    helm.sh/chart: goapp-0.1.0
+    app.kubernetes.io/name: goapp
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: goapp
+      app.kubernetes.io/instance: RELEASE-NAME
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: goapp
+        app.kubernetes.io/instance: RELEASE-NAME
+    spec:
+      serviceAccountName: gouser
+      securityContext:
+        {}
+      containers:
+        - name: goapp
+          securityContext:
+            {}
+          image: "nirothegreat/goapp:latest"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {}
+---
+# Source: goapp/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "RELEASE-NAME-goapp-test-connection"
+  labels:
+    helm.sh/chart: goapp-0.1.0
+    app.kubernetes.io/name: goapp
+    app.kubernetes.io/instance: RELEASE-NAME
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['RELEASE-NAME-goapp:8080']
+  restartPolicy: Never
